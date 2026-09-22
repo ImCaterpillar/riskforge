@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# 本地数据与密钥（绝不提交任何凭据/客户数据）
+*.local
+.env
+.env.*
+secrets/
+data/private/
+*.key
+*.pem
+
+# 编辑器/系统
+.idea/
+.vscode/
+.DS_Store/
+Thumbs.db
+
+# --- public-release safety ---
+node_modules/
+.next/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+.env.local
+.env.*.local
+*.log
+*.tsbuildinfo
+.coverage
+coverage/
+test-results/
+playwright-report/
+dist/
+.DS_Store
+Thumbs.db

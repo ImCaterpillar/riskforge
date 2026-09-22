@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "riskforge"
+version = "0.1.0"
+description = "事件驱动的量化回测与风险分析框架（核心仅依赖 Python 标准库，离线可构建/可测试）"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+authors = [{ name = "imcaterpillar" }]
+keywords = ["quant", "backtest", "risk", "finance", "event-driven"]
+# 核心运行时零第三方依赖，保证在无网络环境也能安装、运行与测试。
+dependencies = []
+
+[project.optional-dependencies]
+# 仅 HTML/图表报告等可选功能需要，不影响核心与单元测试。
+report = ["matplotlib>=3.7"]
+
+[project.scripts]
+riskforge = "riskforge.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
