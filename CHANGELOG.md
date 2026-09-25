@@ -2,6 +2,23 @@
 
 本项目采用语义化版本，按真实开发里程碑记录。
 
+## 未发版 —— 工程质量修复（2026-09-25）
+
+### 修复
+- `pyproject.toml` 的 `version` 由 `0.1.0` 更正为 `0.2.0`：该字段未随 0.2.0 里程碑同步，
+  导致安装元数据（`pip show riskforge`）与 `riskforge --version`（读取 `__init__.__version__`）不一致。
+- `pyproject.toml` 的 `license` 由 `Proprietary` 更正为 `MIT`，与仓库根 `LICENSE` 及
+  README 的“基于 MIT 协议开源”保持一致。
+- 删除 `src/riskforge/data/synthetic.py` 中未使用的 `typing.Sequence` 导入。
+
+### 工程
+- 新增 GitHub Actions CI（`.github/workflows/ci.yml`）：ubuntu-latest × Python 3.11/3.12，
+  依次执行 `pip install -e .`、校验命令行入口、断言核心运行时依赖仍为空、
+  `python -m unittest discover -s tests -v`、CLI 端到端 smoke（synth / validate / signal）。
+- README 增加 CI 与 License 徽章，并补充命令行入口与 CI 说明。
+- 复核确认：59 个标准库 unittest 全绿；`examples/` 两个脚本可运行，且重跑后提交的
+  `data/samples/*.csv` 字节不变，固定 seed 的可复现性成立。
+
 ## 0.2.0 —— M2 指标与策略接口（2026-09-21）
 
 ### 新增

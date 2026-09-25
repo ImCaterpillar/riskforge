@@ -4,11 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "riskforge"
-version = "0.1.0"
+# 必须与 src/riskforge/__init__.py 的 __version__ 保持一致（`riskforge --version` 读取的是后者）。
+version = "0.2.0"
 description = "事件驱动的量化回测与风险分析框架（核心仅依赖 Python 标准库，离线可构建/可测试）"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "Proprietary" }
+# 与仓库根目录的 LICENSE、README 的“基于 MIT 协议开源”保持一致。
+license = { text = "MIT" }
 authors = [{ name = "imcaterpillar" }]
 keywords = ["quant", "backtest", "risk", "finance", "event-driven"]
 # 核心运行时零第三方依赖，保证在无网络环境也能安装、运行与测试。

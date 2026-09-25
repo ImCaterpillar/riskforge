@@ -16,7 +16,7 @@ import math
 import random
 from dataclasses import dataclass
 from datetime import date
-from typing import Dict, List, Optional, Sequence
+from typing import Dict, List, Optional
 
 from riskforge.data.bars import Bar
 from riskforge.data.calendar import TradingCalendar

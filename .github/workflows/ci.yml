@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install package in editable mode
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
+      - name: Verify the console script is installed
+        run: riskforge --version
+
+      - name: Verify the core is still dependency-free
+        run: |
+          python -c "import pathlib, tomllib; d = tomllib.loads(pathlib.Path('pyproject.toml').read_text(encoding='utf-8'))['project'].get('dependencies', []); print('declared runtime dependencies:', d); assert d == [], d"
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Smoke-test the CLI end to end
+        run: |
+          riskforge data synth --out /tmp/rf-synth --days 30 --seed 7 --symbol DEMO
+          riskforge data validate --file /tmp/rf-synth/DEMO.csv
+          riskforge signal generate --file /tmp/rf-synth/DEMO.csv --strategy ma-cross --fast 5 --slow 10 --out /tmp/rf-synth/DEMO.signals.csv

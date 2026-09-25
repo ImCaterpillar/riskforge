@@ -1,5 +1,8 @@
 # riskforge
 
+[![CI](https://github.com/ImCaterpillar/riskforge/actions/workflows/ci.yml/badge.svg)](https://github.com/ImCaterpillar/riskforge/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 事件驱动的**量化回测与风险分析框架**（Python）。面向个人研究：从行情数据、策略信号、
 事件驱动撮合，到绩效与风险指标、参数稳健性、报告输出，提供一条可复现、可离线运行的完整链路。
 
@@ -49,6 +52,15 @@ python -m unittest discover -s tests
 ```bash
 pip install -e .
 ```
+
+安装后会提供 `riskforge` 命令行入口（与 `python -m riskforge` 等价）：
+
+```bash
+riskforge --version
+```
+
+推送或发起 PR 时，`.github/workflows/ci.yml` 会在 Python 3.11 / 3.12 上执行
+`pip install -e .`、`python -m unittest discover -s tests`，并验证核心运行时依赖仍为空。
 
 ## 命令行用法
 
